@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,57 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$taskList = [
-    'first' => 'Eat',
-    'second' => 'Word',
-    'third'=> 'play'
-];
+Route::get('/',[HomeController::class,'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get ('/tasks',[TaskController::class,'index']);
+Route::get ('/tasks/{key}',[TaskController::class,'show']);
+Route::post ('/tasks/{key}',[TaskController::class,'store']);
+Route::patch ('/tasks/{key}',[TaskController::class,'update']);
+Route::delete ('/tasks/{key}',[TaskController::class,'delete']);
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::post('/tasks/{key}', function($key) use ($taskList){
+//     // return request() -> all();
+//     $taskList[request () -> key] = request()-> task;
+//     return $taskList;
+// });
 
-Route::get('/helloo', function(){
-    // return response() -> json ([
-    //     'message' => 'hello world'
-    // ]);
-    $dataArray = [
-        'message' => 'hello world',
-        'test' => 'testing'
-    
-    ];
-    return ddd($dataArray);
-    
-});
+// Route::patch('/tasks/{key}',function($key) use ($taskList){
+//     $taskList[$key] = request()-> task;
+//     return $taskList;
+// });
 
-Route::get ('/tasks',function() use ($taskList){
-    if (request()->search) {
-        return $taskList[request()->search];
-    }else{
-        return $taskList;
-    }
-});
-
-Route::get ('/tasks/{param}',function($param) use ($taskList){
-    return $taskList[$param];
-});
-
-Route::post('/tasks/{key}', function($key) use ($taskList){
-    // return request() -> all();
-    $taskList[request () -> key] = request()-> task;
-    return $taskList;
-});
-
-Route::patch('/tasks/{key}',function($key) use ($taskList){
-    $taskList[$key] = request()-> task;
-    return $taskList;
-});
-
-Route::delete('/tasks/{key}', function($key) use ($taskList){
-    unset($taskList[$key]);
-    return $taskList;
-});
+// Route::delete('/tasks/{key}', function($key) use ($taskList){
+//     unset($taskList[$key]);
+//     return $taskList;
+// });
