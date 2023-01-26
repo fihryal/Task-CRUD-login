@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'index']);
 
 Route::get ('/tasks',[TaskController::class,'index']);
-Route::get ('/tasks/{key}',[TaskController::class,'show']);
-Route::post ('/tasks/{key}',[TaskController::class,'store']);
-Route::patch ('/tasks/{key}',[TaskController::class,'update']);
-Route::delete ('/tasks/{key}',[TaskController::class,'delete']);
+Route::get ('/tasks/{id}',[TaskController::class,'show']);
+Route::post ('/tasks',[TaskController::class,'store']);
+Route::patch ('/tasks/{id}',[TaskController::class,'update']);
+Route::delete ('/tasks/{id}',[TaskController::class,'delete']);
 
 // Route::post('/tasks/{key}', function($key) use ($taskList){
 //     // return request() -> all();
