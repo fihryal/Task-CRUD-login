@@ -25,8 +25,10 @@ class TaskController extends Controller
 
             return $task;
         }
-        $task = Task::all();
-        return $task;
+        $task = Task::paginate(3);
+        return view('task.index', [
+            'data' => $task
+        ]);
         
     }
 
