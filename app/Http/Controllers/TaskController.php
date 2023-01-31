@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Task;
+use Directory;
 
 class TaskController extends Controller
 {
@@ -44,23 +45,25 @@ class TaskController extends Controller
     public function store(Request $request){
     //     $this -> taskList[$request -> key] = $request-> task;
     // return $this -> taskList;
-    Task::created([
+    Task::create([
         'task' => $request->task,
         'user' => $request->user
     ]);
-    return 'Success';
+    return redirect('/tasks');
     }
 
     public function edit($id){
-        return view('task.edit');
+        $task = Task::find($id);
+        return view('task.edit',compact('task'));
     }
 
     public function update(Request $request,$id){
-        $task = Task::find($id)->update([
+        $task = Task::find($id);
+        $task->update([
         'task' => $request->task,
         'user' => $request->user
         ]);
-        return $task;
+        return redirect('/tasks');
     }
 
     public function delete(Request $request,$id){
