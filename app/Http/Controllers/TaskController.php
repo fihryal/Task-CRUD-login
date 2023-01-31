@@ -68,6 +68,6 @@ class TaskController extends Controller
 
     public function delete(Request $request,$id){
         $task = Task::find($id)->delete();
-        return 'Success';
+        return redirect('/tasks');
     }
 }
