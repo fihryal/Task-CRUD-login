@@ -13,6 +13,7 @@ class TaskController extends Controller
 
     public function __construct(){
         $this -> middleware('auth');
+        $this -> middleware('verified');
         // $this -> middleware('is_admin');
     }
 
